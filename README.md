@@ -8,5 +8,5 @@
 
 ### Documentation externe
 
-- [Collection de bookmarks](https://raindrop.io/clementdarne8888/ia-22792050)
+- [Collection de bookmarks](https://raindrop.io/clementdarne8888/net-22860221)
 
