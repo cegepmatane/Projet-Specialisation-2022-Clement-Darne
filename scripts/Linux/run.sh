@@ -10,6 +10,7 @@ DOTNET="../../vendor/dotnet/dotnet-5.0/dotnet"
 	DOTNET="dotnet"
 }
 
+"$DOTNET" restore "../../Success History"
 "$DOTNET" run --project "../../Success History"
 
 cd "$INITIAL_WORKING_DIRECTORY"
