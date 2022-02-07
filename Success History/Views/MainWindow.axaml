@@ -15,7 +15,7 @@
 	<StackPanel Margin="30" Height="NaN" VerticalAlignment="Center">
         
 		<TextBlock DockPanel.Dock="Top" Text="Hello Avalonia" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<DockPanel Margin="20">
+		<DockPanel Margin="30">
 			<Button Margin="50 0" DockPanel.Dock="Left" HorizontalAlignment="Left">Sérialiser JSON</Button>
 			<Button Margin="50 0" DockPanel.Dock="Right" HorizontalAlignment="Right">Désérialiser JSON</Button>
 		</DockPanel>
