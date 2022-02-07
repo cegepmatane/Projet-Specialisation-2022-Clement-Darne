@@ -1,4 +1,4 @@
-# Projet de Spécialisation - Clément Darne
+# Success History - Clément Darne
 
 ## Documents
 
@@ -19,3 +19,57 @@
 
 - Collection de bookmarks ([Raindrop](https://raindrop.io/ClementDrn/net-22860221))
 
+
+## Installation
+
+Tout d'abord, il faut cloner le dépôt.
+
+```bash
+git clone https://github.com/cegepmatane/Projet-Specialisation-2022-Clement-Darne/
+```
+
+### Linux
+
+Sur Linux il faut ensuite installer .NET et ses dépendances. Plusieurs méthodes sont possibles.
+
+#### Installation locale
+
+Pour installer .NET dans le répertoire du projet, il suffit d'exécuter le script dédié. Par contre il faut que les dépendances, comme décrites sur la [documentation .NET](https://docs.microsoft.com/en-us/dotnet/core/install/linux), soient aussi installées.
+
+```bash
+scripts/Linux/install-dependencies.sh
+```
+
+#### Installation globale
+
+Utiliser un gestionnaire de package qui installe en même temps les dépendances. Si vous utilisez le gestionnaire `apt` vous pouvez télécharger un des dépôt de Microsoft en sélectionnant le bon `packages-microsoft-prod` depuis ce lien : https://packages.microsoft.com/config/. Il faut ensuite l'implémenter dans le gestionnaire de paquets.
+
+```bash
+# Exemple Ubuntu 20.04
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+```
+
+Une fois que le gestionnaire a connaissance des paquets .NET, on peut installer le SDK correspondant compatible avec l'application : **SDK 5.0**.
+
+```bash
+sudo apt install dotnet-sdk-5.0
+```
+
+
+## Lancement de l'application
+
+### Linux
+
+#### Compilation
+
+```bash
+scripts/Linux/build.sh
+```
+
+#### Exécution
+
+```bash
+scripts/Linux/run.sh
+```
