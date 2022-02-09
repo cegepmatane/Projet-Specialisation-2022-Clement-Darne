@@ -18,30 +18,44 @@ namespace Success_History.Models
 
         public string Text { get; set; }
 
+
         public void Serialize()
         {
             // Directory creation if it does not exist yet
-            if (!Directory.Exists("./data"))
+            if (!Directory.Exists(_jsonDirectoryPath))
             {
-                Directory.CreateDirectory("./data");
+                Directory.CreateDirectory(_jsonDirectoryPath);
             }
 
             string jsonString = JsonSerializer.Serialize(this);
-            File.WriteAllText("./data/test.json", jsonString);
+            File.WriteAllText(_jsonDirectoryPath + "/test.json", jsonString);
         }
 
         public static Test? Deserialize()
         {
             try
             {
-                string jsonString = File.ReadAllText("./data/test.json");
+                string jsonString = File.ReadAllText(_jsonDirectoryPath + "/test.json");
                 return JsonSerializer.Deserialize<Test>(jsonString);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
         }
+
+
+        private static string SetJsonDirectoryPath()
+        {
+            string exeFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string? directoryPath = Path.GetDirectoryName(exeFilePath);
+            if (directoryPath == null)
+                return "./data";
+            else
+                return directoryPath + "/data";
+        }
+
+        private static string _jsonDirectoryPath = SetJsonDirectoryPath();
     }
 
 }
