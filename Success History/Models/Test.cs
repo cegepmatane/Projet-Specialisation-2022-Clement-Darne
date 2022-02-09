@@ -30,9 +30,17 @@ namespace Success_History.Models
             File.WriteAllText("./data/test.json", jsonString);
         }
 
-        public bool deserialize()
+        public static Test? Deserialize()
         {
-            return false;
+            try
+            {
+                string jsonString = File.ReadAllText("./data/test.json");
+                return JsonSerializer.Deserialize<Test>(jsonString);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 

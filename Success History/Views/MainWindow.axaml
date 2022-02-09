@@ -14,11 +14,12 @@
 
 	<StackPanel Margin="30" Height="NaN" VerticalAlignment="Center">
         
-		<TextBlock DockPanel.Dock="Top" Text="Hello Avalonia" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<TextBlock Text="Hello Avalonia" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		<DockPanel Margin="30">
 			<Button Margin="50 0" DockPanel.Dock="Left" HorizontalAlignment="Left" Command="{Binding SerializeCommand}">Sérialiser JSON</Button>
-			<Button Margin="50 0" DockPanel.Dock="Right" HorizontalAlignment="Right">Désérialiser JSON</Button>
+			<Button Margin="50 0" DockPanel.Dock="Right" HorizontalAlignment="Right" Command="{Binding DeserializeCommand}">Désérialiser JSON"</Button>
 		</DockPanel>
+		<TextBlock Text="{Binding JsonText}" HorizontalAlignment="Center"/>
 	</StackPanel>
 	
 </Window>

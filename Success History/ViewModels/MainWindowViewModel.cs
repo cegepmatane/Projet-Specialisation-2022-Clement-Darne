@@ -17,10 +17,26 @@ namespace Success_History.ViewModels
                 var test = new Test("Hello JSON");
                 test.Serialize();
             });
+            
+            DeserializeCommand = ReactiveCommand.Create(() =>
+            {
+                var test = Test.Deserialize();
+                if (test != null)
+                    JsonText = test.Text;
+            });
         }
 
         public string Greeting => "Welcome to Avalonia!";
 
         public ICommand SerializeCommand { get; }
+        public ICommand DeserializeCommand { get; }
+
+        private string? _jsonText = "";
+
+        public string? JsonText
+        {
+            get => _jsonText;
+            set => this.RaiseAndSetIfChanged(ref _jsonText, value);
+        }
     }
 }
