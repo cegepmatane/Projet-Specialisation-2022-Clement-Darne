@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Success_History.Views
 {
-    public partial class MainWindow : Window
+    public partial class FenetrePrincipale : Window
     {
-        public MainWindow()
+        public FenetrePrincipale()
         {
             InitializeComponent();
 #if DEBUG

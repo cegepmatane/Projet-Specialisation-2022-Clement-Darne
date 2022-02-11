@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Success_History.Views.MainWindow"
+        x:Class="Success_History.Views.FenetrePrincipale"
         Icon="/Assets/avalonia-logo.ico"
         Title="Success History">
 
@@ -16,10 +16,10 @@
         
 		<TextBlock Text="Hello Avalonia" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		<DockPanel Margin="30">
-			<Button Margin="50 0" DockPanel.Dock="Left" HorizontalAlignment="Left" Command="{Binding SerializeCommand}">Sérialiser JSON</Button>
-			<Button Margin="50 0" DockPanel.Dock="Right" HorizontalAlignment="Right" Command="{Binding DeserializeCommand}">Désérialiser JSON"</Button>
+			<Button Margin="50 0" DockPanel.Dock="Left" HorizontalAlignment="Left" Command="{Binding CommandeSerialiser}">Sérialiser JSON</Button>
+			<Button Margin="50 0" DockPanel.Dock="Right" HorizontalAlignment="Right" Command="{Binding CommandeDeserialiser}">Désérialiser JSON"</Button>
 		</DockPanel>
-		<TextBlock Text="{Binding JsonText}" HorizontalAlignment="Center"/>
+		<TextBlock Text="{Binding TexteJSON}" HorizontalAlignment="Center"/>
 	</StackPanel>
 	
 </Window>

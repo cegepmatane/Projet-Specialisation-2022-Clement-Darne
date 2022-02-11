@@ -11,34 +11,37 @@ namespace Success_History.Models
 {
     public class Test
     {
-        public Test(string text)
+        public Test(string texte)
         {
-            Text = text;
+            Texte = texte;
         }
 
-        public string Text { get; set; }
+        public string Texte { get; set; }
 
-        public void Serialize()
+        public void Serialiser()
         {
-            // Directory creation if it does not exist yet
+            // Création du dossier s'il n'existe pas encore.
             if (!Directory.Exists("./data"))
             {
                 Directory.CreateDirectory("./data");
             }
 
-            string jsonString = JsonSerializer.Serialize(this);
-            File.WriteAllText("./data/test.json", jsonString);
+            // Enregistrement du fichier avec le texte de sérialisation.
+            string stringJSON = JsonSerializer.Serialize(this);
+            File.WriteAllText("./data/test.json", stringJSON);
         }
 
-        public static Test? Deserialize()
+        public static Test? Deserialiser()
         {
+            // Le fichier n'existe pas forcément.
             try
             {
-                string jsonString = File.ReadAllText("./data/test.json");
-                return JsonSerializer.Deserialize<Test>(jsonString);
+                string stringJSON = File.ReadAllText("./data/test.json");
+                return JsonSerializer.Deserialize<Test>(stringJSON);
             }
             catch (Exception ex)
             {
+                Console.Error.WriteLine(ex.Message);
                 return null;
             }
         }
