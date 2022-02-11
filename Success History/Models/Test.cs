@@ -21,14 +21,13 @@ namespace Success_History.Models
         public void Serialiser()
         {
             // Création du dossier s'il n'existe pas encore.
-            if (!Directory.Exists("./data"))
+            if (!Directory.Exists(_cheminRepertoireJSON))
             {
-                Directory.CreateDirectory("./data");
+                Directory.CreateDirectory(_cheminRepertoireJSON);
             }
 
-            // Enregistrement du fichier avec le texte de sérialisation.
             string stringJSON = JsonSerializer.Serialize(this);
-            File.WriteAllText("./data/test.json", stringJSON);
+            File.WriteAllText(_cheminRepertoireJSON + "/test.json", stringJSON);
         }
 
         public static Test? Deserialiser()
@@ -36,7 +35,7 @@ namespace Success_History.Models
             // Le fichier n'existe pas forcément.
             try
             {
-                string stringJSON = File.ReadAllText("./data/test.json");
+                string stringJSON = File.ReadAllText(_cheminRepertoireJSON + "/test.json");
                 return JsonSerializer.Deserialize<Test>(stringJSON);
             }
             catch (Exception ex)
@@ -45,6 +44,19 @@ namespace Success_History.Models
                 return null;
             }
         }
+
+
+        private static string InitialiserCheminRepertoireJSON()
+        {
+            string cheminEXE = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string? cheminRepertoire = Path.GetDirectoryName(cheminEXE);
+            if (cheminRepertoire == null)
+                return "./data";
+            else
+                return cheminRepertoire + "/data";
+        }
+
+        private static string _cheminRepertoireJSON = InitialiserCheminRepertoireJSON();
     }
 
 }
