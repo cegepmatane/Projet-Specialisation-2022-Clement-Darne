@@ -56,6 +56,7 @@ namespace Success_History.Models
                 return cheminRepertoire + "/data";
         }
 
+        
         private static string _cheminRepertoireJSON = InitialiserCheminRepertoireJSON();
     }
 
