@@ -14,6 +14,7 @@
 - PoC et choix technologiques 
 ([Local](./doc/Clément_Darne_PoC_et_Choix_technologiques.pdf))
 ([Drive](https://docs.google.com/document/d/11wGQvmYWSAQvyj1FjM4IuKHJmywe2WRGGacDEhz8f9I/edit?usp=sharing)) 
+- Analyse fonctionnelle ([Drive](https://docs.google.com/presentation/d/135o8Wbq9iUsmIQ24OMhoskUaWGAw-txcJaZNcuo_Ilw/edit?usp=sharing))
 
 ### Documentation externe
 
