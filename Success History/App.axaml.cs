@@ -17,9 +17,9 @@ namespace Success_History
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new FenetrePrincipale
+                desktop.MainWindow = new FenetreDossier
                 {
-                    DataContext = new FenetrePrincipaleViewModel(),
+                    DataContext = new FenetreDossierViewModel(),
                 };
             }
 
