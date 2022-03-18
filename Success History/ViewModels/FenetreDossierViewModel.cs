@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define DOSSIER_DEMO
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,7 @@ using System.IO;
 using ReactiveUI;
 using System.Text.Json;
 
+
 namespace Success_History.ViewModels
 {
     public class FenetreDossierViewModel : ViewModelBase
@@ -16,22 +19,24 @@ namespace Success_History.ViewModels
         {
             // Dossier de test
 #if DOSSIER_DEMO
-            _dossier = new Models.Groupe() { Nom = "DUT S3" };
-            _dossier.Groupes = new List<Models.Groupe>();
+            Models.Groupe dossier = new Models.Groupe() { Nom = "DUT S3" };
+            dossier.Groupes = new List<Models.Groupe>();
 
             Models.Groupe maths = new Models.Groupe() { Nom = "Mathématiques" };
             maths.Notes = new List<Models.Note>();
-            _dossier.Groupes.Add(maths);
+            dossier.Groupes.Add(maths);
             
             Models.Groupe algo = new Models.Groupe() { Nom = "Algorithmique" };
             algo.Notes = new List<Models.Note>();
-            _dossier.Groupes.Add(algo);
+            dossier.Groupes.Add(algo);
 
-            maths.Notes.Add(new Models.Note() { Points = 19750, Max = 20000, Description = "Chapitres 1, 2 et 3" });
+            maths.Notes.Add(new Models.Note() { Points = 19.750f, Max = 20.000f, Description = "Chapitres 1, 2 et 3" });
 
-            algo.Notes.Add(new Models.Note() { Points = 18000, Max = 20000, Description = "Chapitre 1" });
-            algo.Notes.Add(new Models.Note() { Points = 15000, Max = 20000, Description = "Chapitre 2" });
-            algo.Notes.Add(new Models.Note() { Points = 16000, Max = 20000, Description = "Chapitre 3" });
+            algo.Notes.Add(new Models.Note() { Points = 18.000f, Max = 20.000f, Description = "Chapitre 1" });
+            algo.Notes.Add(new Models.Note() { Points = 15.000f, Max = 20.000f, Description = "Chapitre 2" });
+            algo.Notes.Add(new Models.Note() { Points = 16.000f, Max = 20.000f, Description = "Chapitre 3" });
+
+            Dossier = dossier;
 #endif
 
             // Le lambda exécuté lors d'un clique sur le bouton "Sérialiser JSON".
@@ -69,18 +74,13 @@ namespace Success_History.ViewModels
             try
             {
                 string stringJSON = File.ReadAllText(_cheminRepertoireDossier + "/dossier.json");
-                _dossier = JsonSerializer.Deserialize<Models.Groupe>(stringJSON);
+                Dossier = JsonSerializer.Deserialize<Models.Groupe>(stringJSON);
             }
             catch (Exception ex)
             {
                 Console.Error.WriteLine(ex.Message);
-                _dossier = null;
+                Dossier = null;
             }
-
-            if (_dossier != null)
-                TitreFenetre = _dossier.Nom + " - Success History";
-            else
-                TitreFenetre = "Success History";
         }
 
         private static string InitialiserCheminRepertoireJSON()
@@ -106,7 +106,40 @@ namespace Success_History.ViewModels
             set => this.RaiseAndSetIfChanged(ref _titreFenetre, value);
         }
 
+
+        private int _largeur = 960;
+
+        public int Largeur
+        {
+            get => _largeur;
+            set => this.RaiseAndSetIfChanged(ref _largeur, value);
+        }
+
+        private int _hauteur = 540;
+
+        public int Hauteur
+        {
+            get => _hauteur;
+            set => this.RaiseAndSetIfChanged(ref _hauteur, value);
+        }
+
         private Models.Groupe? _dossier;
+
+        public Models.Groupe? Dossier
+        {
+            get => _dossier;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _dossier, value);
+
+                if (Dossier != null)
+                    TitreFenetre = Dossier.Nom + " - Success History";
+                else
+                    TitreFenetre = "Success History";
+            }
+        }
+
+
         private string _cheminRepertoireDossier = InitialiserCheminRepertoireJSON();
     }
 }

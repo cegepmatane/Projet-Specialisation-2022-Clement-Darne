@@ -19,8 +19,8 @@ namespace Success_History.Models
             set { _points = value; }
         }
 
-        public float Max 
-        { 
+        public float Max
+        {
             get { return _max; }
             set { _max = value; }
         }
@@ -31,6 +31,6 @@ namespace Success_History.Models
 
 
         private float? _points;
-        private float _max;
+        private float _max = 20.0f;
     }
 }

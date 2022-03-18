@@ -9,7 +9,7 @@ namespace Success_History.Models
     public class Groupe : INotable
     {
         // Stocké en millièmes. 
-        public float Coefficient { get; set; } = 1000;
+        public float Coefficient { get; set; } = 1.0f;
 
         public string Nom { get; set; } = "";
 
@@ -27,7 +27,8 @@ namespace Success_History.Models
                 if (notables != null)
                 {
                     float totalPoints = 0.0f;
-                    float totalCoefficients = 0.0f;
+                    float totalMaxs = 0.0f;
+                    int count = 0;
 
                     foreach (var notable in notables)
                     {
@@ -35,12 +36,14 @@ namespace Success_History.Models
                         if (points != null)
                         {
                             totalPoints += notable.Coefficient * (float)points / notable.Max;
-                            totalCoefficients += notable.Coefficient;
+                            totalMaxs += notable.Coefficient * notable.Max;
+                            ++count;
                         }
                     }
 
-                    float moyenne = totalPoints / totalCoefficients;
+                    float? moyenne = (count != 0) ? totalPoints * totalMaxs / (float)count / (float)count : null;
                     Console.WriteLine(moyenne);
+
                     return moyenne;
                 }
                 else
@@ -50,6 +53,6 @@ namespace Success_History.Models
             }
         }
 
-        public float Max { get; }
+        public float Max { get; } = 20.0f;
     }
 }
