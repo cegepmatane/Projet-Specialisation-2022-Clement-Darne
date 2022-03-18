@@ -6,33 +6,31 @@ using System.Threading.Tasks;
 
 namespace Success_History.Models
 {
-    public class Note
+    public class Note : INotable
     {
         public Note()
         {
 
         }
 
-        public int Points 
+        public float? Points 
         { 
             get { return _points; } 
             set { _points = value; }
         }
 
-        public int Max 
+        public float Max 
         { 
             get { return _max; }
             set { _max = value; }
         }
 
-        // Stocké en millièmes de points.
-        public int Coefficient { get; set; } = 1000;
+        public float Coefficient { get; set; } = 1.0f;
 
         public string Description { get; set; } = "";
 
 
-        // Stockés en millièmes de points.
-        private int _points;
-        private int _max;
+        private float? _points;
+        private float _max;
     }
 }
