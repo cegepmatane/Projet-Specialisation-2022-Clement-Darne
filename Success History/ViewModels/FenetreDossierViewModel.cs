@@ -10,7 +10,6 @@ using System.IO;
 using ReactiveUI;
 using System.Text.Json;
 
-
 namespace Success_History.ViewModels
 {
     public class FenetreDossierViewModel : ViewModelBase
@@ -39,14 +38,16 @@ namespace Success_History.ViewModels
             Dossier = dossier;
 #endif
 
+            _serialiseur = Models.SerialiseurDossier.Get();
+
             // Le lambda exécuté lors d'un clique sur le bouton "Sérialiser JSON".
-            CommandeSerialiser = ReactiveCommand.Create(() =>
+            CommandeEnregistrer = ReactiveCommand.Create(() =>
             {
                 EnregistrerDossier();
             });
 
             // Le lambda exécuté lors d'un clique sur le bouton "Désérialiser JSON".
-            CommandeDeserialiser = ReactiveCommand.Create(() =>
+            CommandeOuvrir = ReactiveCommand.Create(() =>
             {
                 OuvrirDossier();
             });
@@ -55,47 +56,18 @@ namespace Success_History.ViewModels
 
         public void EnregistrerDossier()
         {
-            if (_dossier != null)
-            {
-                // Création du dossier s'il n'existe pas encore.
-                if (!Directory.Exists(_cheminRepertoireDossier))
-                {
-                    Directory.CreateDirectory(_cheminRepertoireDossier);
-                }
-
-                string stringJSON = JsonSerializer.Serialize(_dossier);
-                File.WriteAllText(_cheminRepertoireDossier + "/dossier.json", stringJSON);
-            }
+            if (Dossier != null)
+                _serialiseur.Serialiser(Dossier);
         }
 
         public void OuvrirDossier()
         {
-            // Le fichier n'existe pas forcément.
-            try
-            {
-                string stringJSON = File.ReadAllText(_cheminRepertoireDossier + "/dossier.json");
-                Dossier = JsonSerializer.Deserialize<Models.Groupe>(stringJSON);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine(ex.Message);
-                Dossier = null;
-            }
-        }
-
-        private static string InitialiserCheminRepertoireJSON()
-        {
-            string cheminEXE = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string? cheminRepertoire = Path.GetDirectoryName(cheminEXE);
-            if (cheminRepertoire == null)
-                return "./data";
-            else
-                return cheminRepertoire + "/data";
+            Dossier = _serialiseur.Deserialiser();
         }
 
 
-        public ICommand CommandeSerialiser { get; }
-        public ICommand CommandeDeserialiser { get; }
+        public ICommand CommandeEnregistrer { get; }
+        public ICommand CommandeOuvrir { get; }
 
 
         private string _titreFenetre = "Success History";
@@ -140,6 +112,6 @@ namespace Success_History.ViewModels
         }
 
 
-        private string _cheminRepertoireDossier = InitialiserCheminRepertoireJSON();
+        private Models.SerialiseurDossier _serialiseur;
     }
 }

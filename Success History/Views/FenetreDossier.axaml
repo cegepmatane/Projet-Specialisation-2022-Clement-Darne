@@ -40,6 +40,8 @@
 		</StackPanel>
 
 		<DockPanel Margin="30">
+			<Button Command="{Binding CommandeEnregistrer}">Enregistrer</Button>
+			<Button Command="{Binding CommandeOuvrir}">Ouvrir</Button>
 		</DockPanel>
 	</StackPanel>
 
