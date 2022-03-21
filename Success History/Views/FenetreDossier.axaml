@@ -5,20 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Success_History.Views.FenetreDossier"
+		xmlns:local="using:Success_History.Views"
+		WindowStartupLocation="CenterScreen"
         Title="{Binding TitreFenetre}"
 		Width="{Binding Largeur, Mode=TwoWay}" Height="{Binding Hauteur, Mode=TwoWay}">
+
 
 	<Window.Styles>
 		<StyleInclude Source="/Assets/Styles.axaml" />
 	</Window.Styles>
-	
+
 	<StackPanel Margin="20" VerticalAlignment="Top" Background="Aqua">
 
 		<StackPanel Classes="z0">
 			<TextBlock Classes="h1" Text="{Binding Dossier.Nom}" Background="Red" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 			<TextBlock Classes="h1 note" Text="{Binding Dossier.Points}" Background="Red" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+			<ListBox Items="{Binding Dossier.Groupes}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<local:GroupeView/>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+
+			<ListBox Items="{Binding Dossier.Notes}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<local:NoteView/>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+
 		</StackPanel>
-		
+
 		<DockPanel Margin="30">
 		</DockPanel>
 	</StackPanel>
