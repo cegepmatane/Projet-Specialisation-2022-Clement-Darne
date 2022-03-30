@@ -9,19 +9,34 @@
 		WindowStartupLocation="CenterScreen"
         Title="{Binding TitreFenetre}"
 		Width="{Binding Largeur, Mode=TwoWay}" Height="{Binding Hauteur, Mode=TwoWay}">
-
-
+	
+	
 	<Window.Styles>
 		<StyleInclude Source="/Assets/Styles.axaml" />
 	</Window.Styles>
 
-	<StackPanel Margin="20" VerticalAlignment="Top" Background="Aqua">
+	
+	<StackPanel Margin="20" VerticalAlignment="Top">
 
-		<StackPanel Classes="z0">
-			<TextBlock Classes="h1" Text="{Binding Dossier.Nom}" Background="Red" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-			<TextBlock Classes="h1 note" Text="{Binding Dossier.Points}" Background="Red" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		<StackPanel Classes="groupe dossier">
+			<DockPanel>
+				<StackPanel HorizontalAlignment="Left">
+					<TextBlock Classes="h1" Text="{Binding Dossier.Nom}"/>
+				</StackPanel>
+				<StackPanel HorizontalAlignment="Right">
+					<TextBlock Classes="h1 note">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="\{0:0.###\}/\{1\}">
+								<Binding Path="Dossier.Points"/>
+								<Binding Path="Dossier.Max"/>
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+				</StackPanel>
+				
+			</DockPanel>
 
-			<ListBox Items="{Binding Dossier.Groupes}">
+			<ListBox Classes="groupes" Items="{Binding Dossier.Groupes}">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<local:GroupeView/>
@@ -29,7 +44,12 @@
 				</ListBox.ItemTemplate>
 			</ListBox>
 
-			<ListBox Items="{Binding Dossier.Notes}">
+			<ListBox Classes="notes" Items="{Binding Dossier.Notes}">
+				<ListBox.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Horizontal"/>
+					</ItemsPanelTemplate>
+				</ListBox.ItemsPanel>
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<local:NoteView/>

@@ -3,14 +3,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:local="using:Success_History.Views"
+			 xmlns:converters="using:Success_History.Views.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Success_History.Views.GroupeView">
+	
 
-    <StackPanel Spacing="5" Width="200" Background="Blue">
-	    <TextBlock Text="{Binding Nom}"/>
-		<TextBlock Text="{Binding Points}"/>
+	<StackPanel Classes="groupe" HorizontalAlignment="Stretch">
+		<DockPanel HorizontalAlignment="Stretch">
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+				<TextBlock Classes="groupName" Text="{Binding Nom}"/>
+				<TextBlock Classes="coefficient" Text="{Binding Coefficient, StringFormat='(coeff. \{0\})'}" 
+						   IsVisible="{Binding Coefficient, Converter={StaticResource inequality}, ConverterParameter='1'}"/>
+			</StackPanel>
 
-		<ListBox Items="{Binding Groupes}">
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+				<TextBlock>
+					<TextBlock.Text>
+						<MultiBinding StringFormat="\{0:0.###\}/\{1\}">
+							<Binding Path="Points"/>
+							<Binding Path="Max"/>
+						</MultiBinding>
+					</TextBlock.Text>
+				</TextBlock>
+			</StackPanel>
+		</DockPanel>
+
+		<ListBox Classes="groupes" Items="{Binding Groupes}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<local:GroupeView/>
@@ -18,7 +36,12 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 
-		<ListBox Items="{Binding Notes}">
+		<ListBox Classes="notes" Items="{Binding Notes}">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<local:NoteView/>

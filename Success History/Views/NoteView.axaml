@@ -6,6 +6,15 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Success_History.Views.NoteView">
 
-	<TextBlock Text="{Binding Points}"/>
+	<StackPanel Classes="note">
+		<TextBlock>
+			<TextBlock.Text>
+				<MultiBinding StringFormat="\{0:0.###\}/\{1\}">
+					<Binding Path="Points"/>
+					<Binding Path="Max"/>
+				</MultiBinding>
+			</TextBlock.Text>
+		</TextBlock>
+	</StackPanel>
 
 </UserControl>
