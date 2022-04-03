@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.IO;
 using ReactiveUI;
 using System.Text.Json;
+using Avalonia.Controls;
+
 
 namespace Success_History.ViewModels
 {
@@ -18,7 +20,8 @@ namespace Success_History.ViewModels
         {
             // Dossier de test
 #if DOSSIER_DEMO
-            Models.Groupe dossier = new Models.Groupe() { Nom = "DUT S3" };
+            Models.Dossier dossier = Models.Dossier.Init();
+            dossier.Nom = "DUT S3";
             dossier.Groupes = new List<Models.Groupe>();
 
             Models.Groupe maths = new Models.Groupe() { Nom = "Mathématiques" };
@@ -37,37 +40,37 @@ namespace Success_History.ViewModels
 
             Dossier = dossier;
 #endif
-
+                  
             _serialiseur = Models.SerialiseurDossier.Get();
-
-            // Le lambda exécuté lors d'un clique sur le bouton "Sérialiser JSON".
-            CommandeEnregistrer = ReactiveCommand.Create(() =>
-            {
-                EnregistrerDossier();
-            });
-
-            // Le lambda exécuté lors d'un clique sur le bouton "Désérialiser JSON".
-            CommandeOuvrir = ReactiveCommand.Create(() =>
-            {
-                OuvrirDossier();
-            });
         }
 
 
-        public void EnregistrerDossier()
+        public void SauvegarderDossier(string? filePath = null)
         {
-            if (Dossier != null)
-                _serialiseur.Serialiser(Dossier);
+            // Anyway, _dossier cannot be null here.
+            if (_dossier != null)
+            {
+                if (filePath == null)
+                {
+                    filePath = Path.Combine(_dossier.DirectoryPath, _dossier.FileName);
+                }
+                else
+                {
+                    _dossier.FileName = Path.GetFileName(filePath);
+
+                    string? directoryPath = Path.GetDirectoryName(filePath);
+                    _dossier.DirectoryPath = (directoryPath != null) ? directoryPath : "";
+                }
+                
+                _serialiseur.Serialiser(_dossier);
+            }
         }
+
 
         public void OuvrirDossier()
         {
-            Dossier = _serialiseur.Deserialiser();
         }
 
-
-        public ICommand CommandeEnregistrer { get; }
-        public ICommand CommandeOuvrir { get; }
 
 
         private string _titreFenetre = "Success History";
@@ -79,25 +82,9 @@ namespace Success_History.ViewModels
         }
 
 
-        private int _largeur = 960;
+        private Models.Dossier? _dossier;
 
-        public int Largeur
-        {
-            get => _largeur;
-            set => this.RaiseAndSetIfChanged(ref _largeur, value);
-        }
-
-        private int _hauteur = 540;
-
-        public int Hauteur
-        {
-            get => _hauteur;
-            set => this.RaiseAndSetIfChanged(ref _hauteur, value);
-        }
-
-        private Models.Groupe? _dossier;
-
-        public Models.Groupe? Dossier
+        public Models.Dossier? Dossier
         {
             get => _dossier;
             set

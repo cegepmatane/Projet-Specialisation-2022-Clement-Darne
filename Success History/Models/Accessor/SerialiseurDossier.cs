@@ -16,26 +16,26 @@ namespace Success_History.Models
             return s_instance;
         }
 
-        public void Serialiser(Groupe dossier)
+        public void Serialiser(Dossier dossier)
         {
             // TODO: Choose file path
 
             // Création du dossier s'il n'existe pas encore.
-            if (!Directory.Exists(_cheminRepertoireDossier))
+            if (!Directory.Exists(dossier.DirectoryPath))
             {
-                Directory.CreateDirectory(_cheminRepertoireDossier);
+                Directory.CreateDirectory(dossier.DirectoryPath);
             }
 
             string stringJSON = JsonSerializer.Serialize(dossier);
-            File.WriteAllText(_cheminRepertoireDossier + "/dossier.json", stringJSON);
+            File.WriteAllText(Path.Combine(dossier.DirectoryPath, dossier.FileName), stringJSON);
         }
 
-        public Groupe? Deserialiser()
+        public Groupe? Deserialiser(string filePath)
         {
             // Le fichier n'existe pas forcément.
             try
             {
-                string stringJSON = File.ReadAllText(_cheminRepertoireDossier + "/dossier.json");
+                string stringJSON = File.ReadAllText(filePath);
                 return JsonSerializer.Deserialize<Models.Groupe>(stringJSON);
             }
             catch (Exception ex)

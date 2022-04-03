@@ -1,3 +1,4 @@
+
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Success_History.ViewModels"
@@ -5,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Success_History.Views.FenetreDossier"
+		x:Name="Window"
 		xmlns:local="using:Success_History.Views"
 		WindowStartupLocation="CenterScreen"
         Title="{Binding TitreFenetre}"
@@ -12,57 +14,85 @@
 	
 	
 	<Window.Styles>
-		<StyleInclude Source="/Assets/Styles.axaml" />
+		<StyleInclude Source="/Assets/Styles.axaml"/>
 	</Window.Styles>
 
-	
-	<StackPanel Margin="20" VerticalAlignment="Top">
-
-		<StackPanel Classes="groupe dossier">
-			<DockPanel>
-				<StackPanel HorizontalAlignment="Left">
-					<TextBlock Classes="h1" Text="{Binding Dossier.Nom}"/>
-				</StackPanel>
-				<StackPanel HorizontalAlignment="Right">
-					<TextBlock Classes="h1 note">
-						<TextBlock.Text>
-							<MultiBinding StringFormat="\{0:0.###\}/\{1\}">
-								<Binding Path="Dossier.Points"/>
-								<Binding Path="Dossier.Max"/>
-							</MultiBinding>
-						</TextBlock.Text>
-					</TextBlock>
-				</StackPanel>
+	<StackPanel>
+		<!-- Menu -->
+		<DockPanel>
+			<Menu DockPanel.Dock="Top">
 				
-			</DockPanel>
+				<MenuItem Header="_Fichier">
+					
+					<MenuItem Header="_Nouveau dossier"/>
+					
+					<MenuItem Header="_Ouvrir un dossier"
+							  x:Name="OuvrirMenuItem"
+							  Command="{Binding ElementName=Window, Path=CommandeOuvrir}"/>
+					
+					<MenuItem Header="_Sauvegarder le dossier"
+							  x:Name="SauvegarderMenuItem" 
+							  IsEnabled="True" 
+							  Command="{Binding CommandeSauvegarder}"/>
+					
+					<MenuItem Header="S_auvegarder le dossier sous..." 
+							  x:Name="SauvegarderSousMenuItem"
+							  IsEnabled="True"
+							  Command="{Binding ElementName=Window, Path=SauvegarderSous}"/>
+					
+					<Separator/>
+					
+					<MenuItem Header="_Quitter"/>
+					
+				</MenuItem>
+			</Menu>
+		</DockPanel>
+	
+		<StackPanel Margin="20" VerticalAlignment="Top">
 
-			<ListBox Classes="groupes" Items="{Binding Dossier.Groupes}">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<local:GroupeView/>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+			<StackPanel Classes="groupe dossier">
+				<DockPanel>
+					<StackPanel HorizontalAlignment="Left">
+						<TextBlock Classes="h1" Text="{Binding Dossier.Nom}"/>
+					</StackPanel>
+					<StackPanel HorizontalAlignment="Right">
+						<TextBlock Classes="h1 note">
+							<TextBlock.Text>
+								<MultiBinding StringFormat="\{0:0.###\}/\{1\}">
+									<Binding Path="Dossier.Points"/>
+									<Binding Path="Dossier.Max"/>
+								</MultiBinding>
+							</TextBlock.Text>
+						</TextBlock>
+					</StackPanel>
+				
+				</DockPanel>
 
-			<ListBox Classes="notes" Items="{Binding Dossier.Notes}">
-				<ListBox.ItemsPanel>
-					<ItemsPanelTemplate>
-						<StackPanel Orientation="Horizontal"/>
-					</ItemsPanelTemplate>
-				</ListBox.ItemsPanel>
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<local:NoteView/>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+				<ListBox Classes="groupes" Items="{Binding Dossier.Groupes}">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<local:GroupeView/>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+
+				<ListBox Classes="notes" Items="{Binding Dossier.Notes}">
+					<ListBox.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Orientation="Horizontal"/>
+						</ItemsPanelTemplate>
+					</ListBox.ItemsPanel>
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<local:NoteView/>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+
+			</StackPanel>
 
 		</StackPanel>
-
-		<DockPanel Margin="30">
-			<Button Command="{Binding CommandeEnregistrer}">Enregistrer</Button>
-			<Button Command="{Binding CommandeOuvrir}">Ouvrir</Button>
-		</DockPanel>
+		
 	</StackPanel>
 
 </Window>

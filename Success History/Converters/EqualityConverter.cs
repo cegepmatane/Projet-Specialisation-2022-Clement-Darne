@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Data.Converters;
 
-namespace Success_History.Views.Converters
+namespace Success_History.Converters
 {
     public class EqualityConverter : IValueConverter
     {
