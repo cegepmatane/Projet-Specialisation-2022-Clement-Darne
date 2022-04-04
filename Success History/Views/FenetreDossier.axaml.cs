@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Layout;
-
+using System;
 
 namespace Success_History.Views
 {
@@ -36,16 +36,35 @@ namespace Success_History.Views
         }
 
 
-        public async void SauvegarderSous(string initialFileName = "notes.shist")
+        public async void SauvegarderSous(string? initialFileName = null)
         {
+            if (initialFileName == null)
+                initialFileName = "notes.shist";
+
+            Console.Out.WriteLine(initialFileName);
+
             Window? parent = (Window?)VisualRoot;
             if (parent == null)
                 return;
 
             string? filePath = await Dialogs.FichierDialogue.Get().SauvegarderDossier(parent, initialFileName);
-            System.Console.WriteLine(filePath);
+            if (filePath == null)
+                return;
 
-            ((ViewModels.FenetreDossierViewModel?)this.DataContext)?.SauvegarderDossier(filePath);
+            ((ViewModels.FenetreDossierViewModel?)DataContext)?.SauvegarderDossier(filePath);
+        }
+
+        public async void Ouvrir()
+        {
+            Window? parent = (Window?)VisualRoot;
+            if (parent == null)
+                return;
+
+            string? filePath = await Dialogs.FichierDialogue.Get().OuvrirDossier(parent);
+            if (filePath == null)
+                return;
+
+            ((ViewModels.FenetreDossierViewModel?)DataContext)?.OuvrirDossier(filePath);
         }
     }
 }

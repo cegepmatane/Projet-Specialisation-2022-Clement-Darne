@@ -20,7 +20,7 @@ namespace Success_History.ViewModels
         {
             // Dossier de test
 #if DOSSIER_DEMO
-            Models.Dossier dossier = Models.Dossier.Init();
+            Models.Groupe dossier = new Models.Groupe();
             dossier.Nom = "DUT S3";
             dossier.Groupes = new List<Models.Groupe>();
 
@@ -38,37 +38,53 @@ namespace Success_History.ViewModels
             algo.Notes.Add(new Models.Note() { Points = 15.000f, Max = 20.000f, Description = "Chapitre 2" });
             algo.Notes.Add(new Models.Note() { Points = 16.000f, Max = 20.000f, Description = "Chapitre 3" });
 
-            Dossier = dossier;
+            Dossier = Models.Dossier.Init(dossier);
 #endif
                   
             _serialiseur = Models.SerialiseurDossier.Get();
+            FichierExiste = false;
         }
 
 
         public void SauvegarderDossier(string? filePath = null)
         {
             // Anyway, _dossier cannot be null here.
-            if (_dossier != null)
+            if (Dossier != null)
             {
-                if (filePath == null)
+                if (filePath != null)
                 {
-                    filePath = Path.Combine(_dossier.DirectoryPath, _dossier.FileName);
-                }
-                else
-                {
-                    _dossier.FileName = Path.GetFileName(filePath);
+                    Dossier.FileName = Path.GetFileName(filePath);
+                    Console.Out.WriteLine(Dossier.FileName);
 
                     string? directoryPath = Path.GetDirectoryName(filePath);
-                    _dossier.DirectoryPath = (directoryPath != null) ? directoryPath : "";
+                    Dossier.DirectoryPath = (directoryPath != null) ? directoryPath : "";
+                    
+                    FichierExiste = true;
                 }
                 
-                _serialiseur.Serialiser(_dossier);
+                _serialiseur.Serialiser(Dossier);
             }
         }
 
 
-        public void OuvrirDossier()
+        public void OuvrirDossier(string filePath)
         {
+            // TODO: Ask if the user is willing to save its work before changing of file.
+            Models.Groupe? dossier = _serialiseur.Deserialiser(filePath);
+            if (dossier == null)
+            {
+                // TODO: Error message. Anyway, this should not happen as the file comes from the OpenFileDialog.
+                return;
+            }
+
+            Dossier = Models.Dossier.Init(dossier);
+
+            Dossier.FileName = Path.GetFileName(filePath);
+
+            string? directoryPath = Path.GetDirectoryName(filePath);
+            Dossier.DirectoryPath = (directoryPath != null) ? directoryPath : "";
+
+            FichierExiste = true;
         }
 
 
@@ -82,6 +98,15 @@ namespace Success_History.ViewModels
         }
 
 
+        private bool _fichierExiste;
+
+        public bool FichierExiste
+        {
+            get => _fichierExiste;
+            set => this.RaiseAndSetIfChanged(ref _fichierExiste, value);
+        }
+
+
         private Models.Dossier? _dossier;
 
         public Models.Dossier? Dossier
@@ -89,12 +114,19 @@ namespace Success_History.ViewModels
             get => _dossier;
             set
             {
-                this.RaiseAndSetIfChanged(ref _dossier, value);
+                _dossier = value;
 
                 if (Dossier != null)
+                {
                     TitreFenetre = Dossier.Nom + " - Success History";
+                }
                 else
+                {
+                    FichierExiste = false;
                     TitreFenetre = "Success History";
+                }
+
+                this.RaisePropertyChanged("Dossier");
             }
         }
 

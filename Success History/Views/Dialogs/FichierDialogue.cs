@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -28,13 +29,21 @@ namespace Success_History.Views.Dialogs
                 Title = "Ouvrir un dossier de notes.",
                 Filters = GetFiltres(),
                 Directory = _cheminRepertoire,
-                InitialFileName = Assembly.GetEntryAssembly()?.GetModules().FirstOrDefault()?.FullyQualifiedName
+                InitialFileName = ""
             }.ShowAsync(parent);
 
             if (result == null || !result.Any())
+            {
                 return null;
+            }
             else
-                return (string?)result.GetValue(0);
+            {
+                var path = (string?)result.GetValue(0);
+                if (path != null)
+                    _cheminRepertoire = path;
+
+                return path;
+            }
         }
 
         public async Task<string?> SauvegarderDossier(Window parent, string initialFileName)
@@ -46,6 +55,13 @@ namespace Success_History.Views.Dialogs
                 Directory = _cheminRepertoire,
                 InitialFileName = initialFileName
             }.ShowAsync(parent);
+
+            if (result != null)
+            {
+                var path = Path.GetDirectoryName(result);
+                if (path != null)
+                    _cheminRepertoire = path;
+            }
 
             return result;
         }

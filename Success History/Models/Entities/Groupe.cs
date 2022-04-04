@@ -8,6 +8,20 @@ namespace Success_History.Models
 {
     public class Groupe : INotable
     {
+        public Groupe()
+        {
+
+        }
+
+        public Groupe(Groupe other)
+        {
+            Coefficient = other.Coefficient;
+            Nom = other.Nom;
+            Notes = other.Notes;
+            Groupes = other.Groupes;
+            Max = other.Max;
+        }
+
         // Stocké en millièmes. 
         public float Coefficient { get; set; } = 1.0f;
 

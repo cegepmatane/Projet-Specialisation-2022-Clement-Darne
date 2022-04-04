@@ -10,9 +10,13 @@ namespace Success_History.Models
 {
     public class Dossier : Groupe
     {
-        public static Dossier Init()
+        public static Dossier Init(Groupe? groupe = null)
         {
-            s_instance = new Dossier();
+            if (groupe == null)
+                s_instance = new Dossier();
+            else
+                s_instance = new Dossier(groupe);
+
             return s_instance;
         }
 
@@ -38,7 +42,18 @@ namespace Success_History.Models
 
         private Dossier()
         {
-            FileName = Nom + ".shist";
+            FileName = "notes.shist";
+            DirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        }
+
+        private Dossier(Groupe groupe)
+            : base(groupe)
+        {
+            if (Nom == null)
+                FileName = "notes.shist";
+            else
+                FileName = Nom + ".shist";
+
             DirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         }
 

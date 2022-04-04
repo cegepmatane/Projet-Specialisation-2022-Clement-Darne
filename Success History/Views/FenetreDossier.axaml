@@ -28,17 +28,18 @@
 					
 					<MenuItem Header="_Ouvrir un dossier"
 							  x:Name="OuvrirMenuItem"
-							  Command="{Binding ElementName=Window, Path=CommandeOuvrir}"/>
+							  Command="{Binding ElementName=Window, Path=Ouvrir}"/>
 					
 					<MenuItem Header="_Sauvegarder le dossier"
 							  x:Name="SauvegarderMenuItem" 
-							  IsEnabled="True" 
-							  Command="{Binding CommandeSauvegarder}"/>
+							  IsEnabled="{Binding FichierExiste}" 
+							  Command="{Binding SauvegarderDossier}"/>
 					
 					<MenuItem Header="S_auvegarder le dossier sous..." 
 							  x:Name="SauvegarderSousMenuItem"
-							  IsEnabled="True"
-							  Command="{Binding ElementName=Window, Path=SauvegarderSous}"/>
+							  IsEnabled="{Binding Dossier, Converter={x:Static ObjectConverters.IsNotNull}}"
+							  Command="{Binding ElementName=Window, Path=SauvegarderSous}"
+							  CommandParameter="{Binding Dossier.FileName}"/>
 					
 					<Separator/>
 					

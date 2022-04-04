@@ -18,8 +18,6 @@ namespace Success_History.Models
 
         public void Serialiser(Dossier dossier)
         {
-            // TODO: Choose file path
-
             // Création du dossier s'il n'existe pas encore.
             if (!Directory.Exists(dossier.DirectoryPath))
             {
@@ -57,7 +55,5 @@ namespace Success_History.Models
 
 
         private static SerialiseurDossier s_instance = new SerialiseurDossier();
-
-        private string _cheminRepertoireDossier = InitialiserCheminRepertoireJSON();
     }
 }
