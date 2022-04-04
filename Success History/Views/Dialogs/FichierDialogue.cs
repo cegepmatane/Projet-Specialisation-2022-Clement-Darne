@@ -26,7 +26,7 @@ namespace Success_History.Views.Dialogs
         {
             var result = await new OpenFileDialog()
             {
-                Title = "Ouvrir un dossier de notes.",
+                Title = "Ouvrir un dossier de notes",
                 Filters = GetFiltres(),
                 Directory = _cheminRepertoire,
                 InitialFileName = ""
@@ -50,7 +50,7 @@ namespace Success_History.Views.Dialogs
         {
             var result = await new SaveFileDialog()
             {
-                Title = "Sauvegarder un dossier de notes.",
+                Title = "Sauvegarder un dossier de notes",
                 Filters = GetFiltres(),
                 Directory = _cheminRepertoire,
                 InitialFileName = initialFileName

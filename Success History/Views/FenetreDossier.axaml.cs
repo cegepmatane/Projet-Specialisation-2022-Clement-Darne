@@ -23,7 +23,7 @@ namespace Success_History.Views
 
             // Ouvrir : CTRL + O
             var ouvrirMenuItem = this.FindControl<MenuItem>("OuvrirMenuItem");
-            HotKeyManager.SetHotKey(sauvegarderMenuItem, new KeyGesture(Key.O, KeyModifiers.Control));
+            HotKeyManager.SetHotKey(ouvrirMenuItem, new KeyGesture(Key.O, KeyModifiers.Control));
             
 #if DEBUG
             this.AttachDevTools();
