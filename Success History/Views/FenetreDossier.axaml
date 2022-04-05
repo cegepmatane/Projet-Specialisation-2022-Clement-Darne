@@ -94,8 +94,6 @@
 
 			</StackPanel>
 
-			<Button Command="{Binding OnDossierUpdate}">Rafraîchir</Button>
-
 		</StackPanel>
 		
 	</StackPanel>

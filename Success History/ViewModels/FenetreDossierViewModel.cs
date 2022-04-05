@@ -98,25 +98,6 @@ namespace Success_History.ViewModels
         public void OnDossierUpdate()
         {
             this.RaisePropertyChanged("Dossier");
-
-/*            if (Dossier != null)
-            {
-                IEnumerable<Models.INotable>? notables = ((Notes != null) ? Notes : Groupes);
-
-                if (notables != null)
-                {
-                    foreach (var notable in notables)
-                    {
-                        float? points = notable.Points;
-                        if (points != null)
-                        {
-                            totalPoints += notable.Coefficient * (float)points / notable.Max;
-                            totalMaxs += notable.Coefficient * notable.Max;
-                            ++count;
-                        }
-                    }
-                }
-            }*/
         }
 
 

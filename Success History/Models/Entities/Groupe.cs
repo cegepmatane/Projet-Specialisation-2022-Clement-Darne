@@ -156,17 +156,6 @@ namespace Success_History.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             Console.WriteLine("prop " + propertyName);
-
-
-            /*switch (propertyName)
-            {
-                case nameof(Max):
-                    ((Groupe?)Parent)?.NotifyPropertyChanged(propertyName);
-                    break;
-                case nameof(Points):
-                    ((Groupe?)Parent)?.NotifyPropertyChanged(propertyName);
-                    break;
-            }*/
         }
     }
 }
