@@ -18,7 +18,7 @@ namespace Success_History.Converters
             return !EqualityConverter.areEqual(stringValue, stringParameter);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // Not supported
             return null;
