@@ -8,9 +8,12 @@ namespace Success_History.Models
 {
     public interface INotable
     {
-        public float? Points { get; }
+        public float? Points { get; set; }
         public float Max { get; }
         public float Coefficient { get; set; }
+
+        public void SetChildrenParent();
+        public INotable? Parent { get; set; }
     }
 
 }

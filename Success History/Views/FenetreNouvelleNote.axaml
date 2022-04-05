@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Success_History.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Success_History.Views.FenetreNouvelleNote"
+        Title="Nouvelle Note">
+
+	<Window.Styles>
+		<StyleInclude Source="/Assets/Styles.axaml"/>
+	</Window.Styles>
+
+	<StackPanel>
+
+		<TextBlock Classes="title" Text="Nouvelle note"/>
+
+		<TextBlock Classes="h3 label" Text="Valeur"/>
+		<StackPanel Orientation="Horizontal">
+			<TextBox Name="Points" Text="{Binding Points, Mode=TwoWay}"/>
+			<TextBlock Text="/"/>
+			<TextBox Name="Max" Text="{Binding Max, Mode=TwoWay}"/>
+		</StackPanel>
+
+		<TextBlock Classes="h3 label" Text="Coefficient"/>
+		<TextBox Name="Coefficient" Text="{Binding Coefficient, Mode=TwoWay}" HorizontalAlignment="Left"/>
+
+		<TextBlock Classes="h3 label" Text="Description"/>
+		<TextBox Name="Description" Text="{Binding Description, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+
+		<Button Classes="button secondary" Command="{Binding Cancel}">Annuler</Button>
+		<Button Classes="button primary" Command="{Binding Submit}">Ajouter la note</Button>
+
+	</StackPanel>
+
+</Window>

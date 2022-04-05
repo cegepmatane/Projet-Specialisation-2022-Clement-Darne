@@ -80,5 +80,6 @@ namespace Success_History.Views
 
             ((ViewModels.FenetreDossierViewModel?)DataContext)?.OuvrirDossier(filePath);
         }
+
     }
 }

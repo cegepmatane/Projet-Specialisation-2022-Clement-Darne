@@ -9,6 +9,17 @@
 	
 
 	<StackPanel Classes="groupe" HorizontalAlignment="Stretch">
+		<StackPanel.ContextMenu>
+			<ContextMenu>
+				<MenuItem Header="Ajouter une note"
+						  IsEnabled="True"
+						  Command="{Binding $parent[UserControl].NouvelleNote}"/>
+				<MenuItem Header="Ajouter un groupe"
+						  IsEnabled="True"
+						  Command="{Binding $parent[UserControl].NouveauGroupe}"/>
+			</ContextMenu>
+		</StackPanel.ContextMenu>
+		
 		<DockPanel HorizontalAlignment="Stretch">
 			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 				<TextBlock Classes="groupName" Text="{Binding Nom}"/>
@@ -28,7 +39,7 @@
 			</StackPanel>
 		</DockPanel>
 
-		<ListBox Classes="groupes" Items="{Binding Groupes}">
+		<ListBox x:Name="GroupList" Classes="groupes" Items="{Binding Groupes}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<local:GroupeView/>

@@ -10,7 +10,7 @@ using System.IO;
 using ReactiveUI;
 using System.Text.Json;
 using Avalonia.Controls;
-
+using System.Collections.ObjectModel;
 
 namespace Success_History.ViewModels
 {
@@ -22,14 +22,14 @@ namespace Success_History.ViewModels
 #if DOSSIER_DEMO
             Models.Groupe dossier = new Models.Groupe();
             dossier.Nom = "DUT S3";
-            dossier.Groupes = new List<Models.Groupe>();
+            dossier.Groupes = new ObservableCollection<Models.Groupe>();
 
             Models.Groupe maths = new Models.Groupe() { Nom = "Mathématiques" };
-            maths.Notes = new List<Models.Note>();
+            maths.Notes = new ObservableCollection<Models.Note>();
             dossier.Groupes.Add(maths);
             
             Models.Groupe algo = new Models.Groupe() { Nom = "Algorithmique" };
-            algo.Notes = new List<Models.Note>();
+            algo.Notes = new ObservableCollection<Models.Note>();
             dossier.Groupes.Add(algo);
 
             maths.Notes.Add(new Models.Note() { Points = 19.750f, Max = 20.000f, Description = "Chapitres 1, 2 et 3" });
@@ -39,8 +39,9 @@ namespace Success_History.ViewModels
             algo.Notes.Add(new Models.Note() { Points = 16.000f, Max = 20.000f, Description = "Chapitre 3" });
 
             Dossier = Models.Dossier.Init(dossier);
+            Dossier.SetChildrenParent();
 #endif
-                  
+
             _serialiseur = Models.SerialiseurDossier.Get();
             FichierExiste = false;
         }
@@ -97,6 +98,25 @@ namespace Success_History.ViewModels
         public void OnDossierUpdate()
         {
             this.RaisePropertyChanged("Dossier");
+
+/*            if (Dossier != null)
+            {
+                IEnumerable<Models.INotable>? notables = ((Notes != null) ? Notes : Groupes);
+
+                if (notables != null)
+                {
+                    foreach (var notable in notables)
+                    {
+                        float? points = notable.Points;
+                        if (points != null)
+                        {
+                            totalPoints += notable.Coefficient * (float)points / notable.Max;
+                            totalMaxs += notable.Coefficient * notable.Max;
+                            ++count;
+                        }
+                    }
+                }
+            }*/
         }
 
 
@@ -128,9 +148,10 @@ namespace Success_History.ViewModels
             {
                 _dossier = value;
 
-                if (Dossier != null)
+                if (_dossier != null)
                 {
-                    TitreFenetre = Dossier.Nom + " - Success History";
+                    _dossier.SetChildrenParent();
+                    TitreFenetre = _dossier.Nom + " - Success History";
                 }
                 else
                 {

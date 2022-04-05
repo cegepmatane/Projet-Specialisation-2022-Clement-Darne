@@ -71,7 +71,7 @@
 				
 				</DockPanel>
 
-				<ListBox Classes="groupes" Items="{Binding Dossier.Groupes}">
+				<ListBox x:Name="GroupList" Classes="groupes" Items="{Binding Dossier.Groupes}">
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<local:GroupeView/>
@@ -93,6 +93,8 @@
 				</ListBox>
 
 			</StackPanel>
+
+			<Button Command="{Binding OnDossierUpdate}">Rafraîchir</Button>
 
 		</StackPanel>
 		
