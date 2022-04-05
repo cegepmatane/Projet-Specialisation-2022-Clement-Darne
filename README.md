@@ -23,7 +23,9 @@
 
 ## Installation
 
-Si vous voulez juste utiliser l'application, les binaries d'une release suffiront.
+Si vous voulez juste utiliser l'application, les binaries d'une release suffiront. 
+
+Si vous voulez, compiler l'application depuis le code source, suivez la procédure ci-dessous.
 
 Tout d'abord, il faut cloner le dépôt.
 
