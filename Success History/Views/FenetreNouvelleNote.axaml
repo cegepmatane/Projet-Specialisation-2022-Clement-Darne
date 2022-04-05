@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Success_History.Views.FenetreNouvelleNote"
-        Title="Nouvelle Note">
+        Title="Nouvelle Note"
+		Width="600" Height="400">
 
 	<Window.Styles>
 		<StyleInclude Source="/Assets/Styles.axaml"/>
