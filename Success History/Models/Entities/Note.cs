@@ -41,6 +41,22 @@ namespace Success_History.Models
 
         public string Description { get; set; } = "";
 
+
+        public void Supprimer()
+        {
+            var parent = ((Groupe?)Parent);
+            if (parent != null)
+            {
+                parent.Notes?.Remove(this);
+
+                if (parent.Notes?.Count == 0)
+                    parent.Notes = null;
+
+                parent.UpdatePoints();
+            }
+        }
+
+
         public void SetChildrenParent()
         {
         }

@@ -7,6 +7,14 @@
              x:Class="Success_History.Views.NoteView">
 
 	<StackPanel Classes="note">
+		<StackPanel.ContextMenu>
+			<ContextMenu>
+				<MenuItem Header="Supprimer la note"
+						  IsEnabled="True"
+						  Command="{Binding Supprimer}"/>
+			</ContextMenu>
+		</StackPanel.ContextMenu>
+		
 		<TextBlock>
 			<TextBlock.Text>
 				<MultiBinding StringFormat="\{0:0.###\}/\{1\}">

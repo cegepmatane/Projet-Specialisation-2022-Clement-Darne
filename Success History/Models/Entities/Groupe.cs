@@ -101,6 +101,21 @@ namespace Success_History.Models
         }
 
 
+        public void Supprimer()
+        {
+            var parent = ((Groupe?)Parent);
+            if (parent != null)
+            {
+                parent.Groupes?.Remove(this);
+
+                if (parent.Groupes?.Count == 0)
+                    parent.Groupes = null;
+
+                parent.UpdatePoints();
+            }
+        }
+
+
         private float? _points;
 
         [JsonIgnore]

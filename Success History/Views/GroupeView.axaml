@@ -17,6 +17,9 @@
 				<MenuItem Header="Ajouter un groupe"
 						  IsEnabled="{Binding Notes, Converter={x:Static ObjectConverters.IsNull}}"
 						  Command="{Binding $parent[UserControl].NouveauGroupe}"/>
+				<MenuItem Header="Supprimer le groupe"
+						  IsEnabled="True"
+						  Command="{Binding Supprimer}"/>
 			</ContextMenu>
 		</StackPanel.ContextMenu>
 		
