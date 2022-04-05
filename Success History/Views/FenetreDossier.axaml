@@ -16,9 +16,9 @@
 		<StyleInclude Source="/Assets/Styles.axaml"/>
 	</Window.Styles>
 
-	<StackPanel>
+	<DockPanel>
 		<!-- Menu -->
-		<DockPanel>
+		<DockPanel DockPanel.Dock="Top">
 			<Menu DockPanel.Dock="Top">
 				
 				<MenuItem Header="_Fichier">
@@ -51,9 +51,19 @@
 			</Menu>
 		</DockPanel>
 	
-		<StackPanel Margin="20" VerticalAlignment="Top">
+		<DockPanel DockPanel.Dock="Bottom" Margin="20" VerticalAlignment="Stretch">
+			<StackPanel DockPanel.Dock="Top" Classes="groupe dossier">
+				<StackPanel.ContextMenu>
+					<ContextMenu>
+						<MenuItem Header="Ajouter une note"
+								  IsEnabled="{Binding Dossier.Groupes, Converter={x:Static ObjectConverters.IsNull}}"
+								  Command="{Binding $parent[Window].NouvelleNote}"/>
+						<MenuItem Header="Ajouter un groupe"
+								  IsEnabled="{Binding Dossier.Notes, Converter={x:Static ObjectConverters.IsNull}}"
+								  Command="{Binding $parent[Window].NouveauGroupe}"/>
+					</ContextMenu>
+				</StackPanel.ContextMenu>
 
-			<StackPanel Classes="groupe dossier">
 				<DockPanel>
 					<StackPanel HorizontalAlignment="Left">
 						<TextBlock Classes="h1" Text="{Binding Dossier.Nom}"/>
@@ -68,7 +78,7 @@
 							</TextBlock.Text>
 						</TextBlock>
 					</StackPanel>
-				
+
 				</DockPanel>
 
 				<ListBox x:Name="GroupList" Classes="groupes" Items="{Binding Dossier.Groupes}">
@@ -94,8 +104,8 @@
 
 			</StackPanel>
 
-		</StackPanel>
+		</DockPanel>
 		
-	</StackPanel>
+	</DockPanel>
 
 </Window>

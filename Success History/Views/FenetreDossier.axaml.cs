@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Layout;
 using System;
+using System.Collections.ObjectModel;
 
 namespace Success_History.Views
 {
@@ -43,10 +44,10 @@ namespace Success_History.Views
         public async void Nouveau()
         {
             var window = new FenetreNouveauDossier();
-            var dossier = await window.ShowDialog<Models.Dossier?>((Window?)VisualRoot);
+            var groupe = await window.ShowDialog<Models.Groupe?>((Window?)VisualRoot);
 
-            if (dossier != null)
-                ((ViewModels.FenetreDossierViewModel?)DataContext)?.NouveauDossier(dossier);
+            if (groupe != null)
+                ((ViewModels.FenetreDossierViewModel?)DataContext)?.NouveauDossier(groupe);
         }
 
 
@@ -79,6 +80,51 @@ namespace Success_History.Views
                 return;
 
             ((ViewModels.FenetreDossierViewModel?)DataContext)?.OuvrirDossier(filePath);
+        }
+
+        public async void NouvelleNote()
+        {
+            // We want a valid group and no other groups inside
+            // because a group cannot contain marks and groups at the same time.
+            var vm = (ViewModels.FenetreDossierViewModel?)DataContext;
+            var dossier = vm?.Dossier;
+            if (dossier != null && dossier.Groupes == null)
+            {
+                var window = new FenetreNouvelleNote();
+                var note = await window.ShowDialog<Models.Note?>((Window?)VisualRoot);
+
+                if (note != null)
+                {
+                    if (dossier.Notes == null)
+                        dossier.Notes = new ObservableCollection<Models.Note>();
+
+                    note.Parent = dossier;
+                    dossier.Notes.Add(note);
+                    dossier.UpdatePoints();
+                }
+            }
+        }
+
+        public async void NouveauGroupe()
+        {
+            // We want a valid group and no marks inside
+            // because a group cannot contain marks and groups at the same time.
+            var vm = (ViewModels.FenetreDossierViewModel?)DataContext;
+            var dossier = vm?.Dossier;
+            if (dossier != null && dossier.Notes == null)
+            {
+                var window = new FenetreNouveauGroupe();
+                var childGroup = await window.ShowDialog<Models.Groupe?>((Window?)VisualRoot);
+
+                if (childGroup != null)
+                {
+                    if (dossier.Groupes == null)
+                        dossier.Groupes = new ObservableCollection<Models.Groupe>();
+
+                    childGroup.Parent = dossier;
+                    dossier.Groupes.Add(childGroup);
+                }
+            }
         }
 
     }

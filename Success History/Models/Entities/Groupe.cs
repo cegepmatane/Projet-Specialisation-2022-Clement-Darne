@@ -85,7 +85,8 @@ namespace Success_History.Models
             }
             else
             {
-                Points = null;
+                if (_points != null)
+                    Points = null;
             }
 
             if (_points != oldPoints)

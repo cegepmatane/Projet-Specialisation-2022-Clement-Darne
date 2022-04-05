@@ -34,6 +34,9 @@
 	</Style>
 
 	<!-- Groupes -->
+	<Style Selector="StackPanel.groupe">
+		<Setter Property="Background" Value="Transparent"/>
+	</Style>
 	<Style Selector="StackPanel.dossier ListBox.groupes">
 		<Setter Property="Background" Value="Transparent"/>
 	</Style>
@@ -48,6 +51,9 @@
 		<Setter Property="HorizontalAlignment" Value="Left"/>
 		<Setter Property="VerticalAlignment" Value="Bottom"/>
 		<Setter Property="Orientation" Value="Horizontal"/>
+	</Style>
+	<Style Selector="StackPanel.dossier">
+		<Setter Property="Background" Value="#fff"/>
 	</Style>
 	<Style Selector="StackPanel.dossier ListBox ListBoxItem">
 		<Setter Property="Margin" Value="12,0,12,12"/>

@@ -5,9 +5,9 @@ using System;
 
 namespace Success_History.Views
 {
-    public partial class FenetreNouveauDossier : Window
+    public partial class FenetreNouveauGroupe : Window
     {
-        public FenetreNouveauDossier()
+        public FenetreNouveauGroupe()
         {
             InitializeComponent();
 

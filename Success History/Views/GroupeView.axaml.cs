@@ -41,24 +41,25 @@ namespace Success_History.Views
             }
         }
 
-        public void NouveauGroupe()
+        public async void NouveauGroupe()
         {
             // We want a valid group and no marks inside
             // because a group cannot contain marks and groups at the same time.
-            /*var groupe = (Models.Groupe?)DataContext;
+            var groupe = (Models.Groupe?)DataContext;
             if (groupe != null && groupe.Notes == null)
             {
                 var window = new FenetreNouveauGroupe();
-                var groupe = await window.ShowDialog<Models.Groupe?>((Window?)VisualRoot);
+                var childGroup = await window.ShowDialog<Models.Groupe?>((Window?)VisualRoot);
 
-                if (groupe != null)
+                if (childGroup != null)
                 {
                     if (groupe.Groupes == null)
                         groupe.Groupes = new ObservableCollection<Models.Groupe>();
 
-                    groupe.Groupes.Add(groupe);
+                    childGroup.Parent = groupe;
+                    groupe.Groupes.Add(childGroup);
                 }
-            }*/
+            }
         }
     }
 }

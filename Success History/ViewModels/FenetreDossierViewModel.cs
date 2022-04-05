@@ -88,9 +88,9 @@ namespace Success_History.ViewModels
             FichierExiste = true;
         }
 
-        public void NouveauDossier(Models.Dossier dossier)
+        public void NouveauDossier(Models.Groupe groupe)
         {
-            Dossier = dossier;
+            Dossier = Models.Dossier.Init(groupe);
             FichierExiste = false;
         }
 

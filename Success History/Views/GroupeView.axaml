@@ -12,10 +12,10 @@
 		<StackPanel.ContextMenu>
 			<ContextMenu>
 				<MenuItem Header="Ajouter une note"
-						  IsEnabled="True"
+						  IsEnabled="{Binding Groupes, Converter={x:Static ObjectConverters.IsNull}}"
 						  Command="{Binding $parent[UserControl].NouvelleNote}"/>
 				<MenuItem Header="Ajouter un groupe"
-						  IsEnabled="True"
+						  IsEnabled="{Binding Notes, Converter={x:Static ObjectConverters.IsNull}}"
 						  Command="{Binding $parent[UserControl].NouveauGroupe}"/>
 			</ContextMenu>
 		</StackPanel.ContextMenu>
