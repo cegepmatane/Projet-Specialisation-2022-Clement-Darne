@@ -13,6 +13,10 @@ namespace Success_History.Views
         {
             InitializeComponent();
 
+            // Nouveau : CTRL + N
+            var nouveauMenuItem = this.FindControl<MenuItem>("NouveauMenuItem");
+            HotKeyManager.SetHotKey(nouveauMenuItem, new KeyGesture(Key.N, KeyModifiers.Control));
+
             // Sauvegarder : CTRL + S
             var sauvegarderMenuItem = this.FindControl<MenuItem>("SauvegarderMenuItem");
             HotKeyManager.SetHotKey(sauvegarderMenuItem, new KeyGesture(Key.S, KeyModifiers.Control));
@@ -33,6 +37,16 @@ namespace Success_History.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+        }
+
+
+        public async void Nouveau()
+        {
+            var window = new FenetreNouveauDossier();
+            var dossier = await window.ShowDialog<Models.Dossier?>((Window?)VisualRoot);
+
+            if (dossier != null)
+                ((ViewModels.FenetreDossierViewModel?)DataContext)?.NouveauDossier(dossier);
         }
 
 

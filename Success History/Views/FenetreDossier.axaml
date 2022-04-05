@@ -9,8 +9,7 @@
 		x:Name="Window"
 		xmlns:local="using:Success_History.Views"
 		WindowStartupLocation="CenterScreen"
-        Title="{Binding TitreFenetre}"
-		Width="{Binding Largeur, Mode=TwoWay}" Height="{Binding Hauteur, Mode=TwoWay}">
+        Title="{Binding TitreFenetre}">
 	
 	
 	<Window.Styles>
@@ -24,7 +23,10 @@
 				
 				<MenuItem Header="_Fichier">
 					
-					<MenuItem Header="_Nouveau dossier"/>
+					<MenuItem Header="_Nouveau dossier"
+							  x:Name="NouveauMenuItem"
+							  IsEnabled="True"
+							  Command="{Binding ElementName=Window, Path=Nouveau}"/>
 					
 					<MenuItem Header="_Ouvrir un dossier"
 							  x:Name="OuvrirMenuItem"

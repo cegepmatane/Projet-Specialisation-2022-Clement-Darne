@@ -1,0 +1,34 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Success_History.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Success_History.Views.FenetreNouveauDossier"
+		xmlns:local="using:Success_History.Views"
+		WindowStartupLocation="CenterScreen"
+        Title="Nouveau dossier de notes"
+		Width="600" Height="400">
+
+	<Window.Styles>
+		<StyleInclude Source="/Assets/Styles.axaml"/>
+	</Window.Styles>
+
+	<StackPanel>
+
+		<TextBlock Classes="title" Text="Nouveau dossier de notes"/>
+		
+		<TextBlock Classes="h2" Text="Configuration du dossier"/>
+
+		<TextBlock Classes="label" Text="Nom"/>
+		<TextBox Name="Nom" Text="{Binding Nom, Mode=TwoWay}"/>
+
+		<TextBlock Classes="label" Text="Points max"/>
+		<TextBox Name="Max" Text="{Binding Max, Mode=TwoWay}"/>
+
+		<Button Classes="button secondary" Command="{Binding Cancel}">Annuler</Button>
+		<Button Classes="button primary" Command="{Binding Submit}">Créer le dossier</Button>
+					
+	</StackPanel>
+	
+</Window>

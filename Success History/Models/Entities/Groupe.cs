@@ -67,6 +67,6 @@ namespace Success_History.Models
             }
         }
 
-        public float Max { get; } = 20.0f;
+        public float Max { get; set; } = 20.0f;
     }
 }

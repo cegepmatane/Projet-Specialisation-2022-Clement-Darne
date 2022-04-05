@@ -17,6 +17,9 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.10" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\FenetreNouveauDossier.axaml.cs">
+      <DependentUpon>FenetreNouveauDossier.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\GroupeView.axaml.cs">
       <DependentUpon>GroupeView.axaml</DependentUpon>
     </Compile>

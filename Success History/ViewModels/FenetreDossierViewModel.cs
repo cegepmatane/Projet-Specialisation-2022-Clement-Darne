@@ -87,6 +87,18 @@ namespace Success_History.ViewModels
             FichierExiste = true;
         }
 
+        public void NouveauDossier(Models.Dossier dossier)
+        {
+            Dossier = dossier;
+            FichierExiste = false;
+        }
+
+
+        public void OnDossierUpdate()
+        {
+            this.RaisePropertyChanged("Dossier");
+        }
+
 
 
         private string _titreFenetre = "Success History";

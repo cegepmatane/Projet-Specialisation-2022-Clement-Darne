@@ -16,6 +16,12 @@
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
+	<Style Selector="TextBlock.title">
+		<Setter Property="FontSize" Value="24"/>
+		<Setter Property="FontWeight" Value="Bold"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+	</Style>
+
 	<Style Selector="ListBox">
 		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
 		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
