@@ -22,11 +22,19 @@
 
 ## Installation
 
+Si vous voulez juste utiliser l'application, les binaries d'une release suffiront.
+
 Tout d'abord, il faut cloner le dépôt.
 
 ```bash
 git clone https://github.com/cegepmatane/Projet-Specialisation-2022-Clement-Darne/
 ```
+
+### Windows
+
+Le lien de téléchargement pour installer .NET sur Windows se trouve sur le [site de Microsoft](https://dotnet.microsoft.com/en-us/download).
+
+Pour compiler l'application, veuillez installer la version 5 du SDK .NET. Sinon, une version Runtime 5 ou plus fera l'affaire.
 
 ### Linux
 
@@ -59,6 +67,10 @@ sudo apt install dotnet-sdk-5.0
 
 
 ## Lancement de l'application
+
+### Windows
+
+L'application peut être compilée et lancée depuis Visual Studio.
 
 ### Linux
 
