@@ -45,7 +45,8 @@
 					
 					<Separator/>
 					
-					<MenuItem Header="_Quitter"/>
+					<MenuItem Header="_Quitter"
+							  Command="{Binding ElementName=Window, Path=Quitter}"/>
 					
 				</MenuItem>
 			</Menu>

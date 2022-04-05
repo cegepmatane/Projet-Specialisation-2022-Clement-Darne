@@ -127,5 +127,10 @@ namespace Success_History.Views
             }
         }
 
+        public void Quitter()
+        {
+            Close();
+        }
+
     }
 }
