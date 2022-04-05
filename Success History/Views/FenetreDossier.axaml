@@ -69,7 +69,7 @@
 						<TextBlock Classes="h1" Text="{Binding Dossier.Nom}"/>
 					</StackPanel>
 					<StackPanel HorizontalAlignment="Right">
-						<TextBlock Classes="h1 note">
+						<TextBlock IsVisible="{Binding Dossier, Converter={x:Static ObjectConverters.IsNotNull}}" Classes="h1 note">
 							<TextBlock.Text>
 								<MultiBinding StringFormat="\{0:0.###\}/\{1\}">
 									<Binding Path="Dossier.Points"/>
