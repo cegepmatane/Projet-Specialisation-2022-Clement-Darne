@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,30 +16,6 @@ namespace Success_History.ViewModels
     {
         public FenetreDossierViewModel()
         {
-            // Dossier de test
-#if DOSSIER_DEMO
-            Models.Groupe dossier = new Models.Groupe();
-            dossier.Nom = "DUT S3";
-            dossier.Groupes = new ObservableCollection<Models.Groupe>();
-
-            Models.Groupe maths = new Models.Groupe() { Nom = "Mathématiques" };
-            maths.Notes = new ObservableCollection<Models.Note>();
-            dossier.Groupes.Add(maths);
-            
-            Models.Groupe algo = new Models.Groupe() { Nom = "Algorithmique" };
-            algo.Notes = new ObservableCollection<Models.Note>();
-            dossier.Groupes.Add(algo);
-
-            maths.Notes.Add(new Models.Note() { Points = 19.750f, Max = 20.000f, Description = "Chapitres 1, 2 et 3" });
-
-            algo.Notes.Add(new Models.Note() { Points = 18.000f, Max = 20.000f, Description = "Chapitre 1" });
-            algo.Notes.Add(new Models.Note() { Points = 15.000f, Max = 20.000f, Description = "Chapitre 2" });
-            algo.Notes.Add(new Models.Note() { Points = 16.000f, Max = 20.000f, Description = "Chapitre 3" });
-
-            Dossier = Models.Dossier.Init(dossier);
-            Dossier.SetChildrenParent();
-#endif
-
             _serialiseur = Models.SerialiseurDossier.Get();
             FichierExiste = false;
         }
