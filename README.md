@@ -4,7 +4,7 @@
 
 ### Présentation du projet
 
-(Success History sur Youtube)[https://www.youtube.com/watch?v=3PtjauYmM94&feature=youtu.be]
+[Success History sur Youtube](https://www.youtube.com/watch?v=3PtjauYmM94&feature=youtu.be)
 
 ### Documents du projet
 
